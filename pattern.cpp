@@ -6,26 +6,26 @@
 
 
 string pattern::get(selector &s) const {
-	string result;
+    string result;
 
-	for(auto &part : parts) {
-		result += *part.get(s);
-	}
+    for(auto &part : parts) {
+        result += *part.get(s);
+    }
 
-	return result;
+    return result;
 }
 
 
 double pattern::get_combinations() const {
-	if(combinations != 0.0) {
-		return combinations;
-	}
+    if(combinations != 0.0) {
+        return combinations;
+    }
 
-	for(auto &part : parts) {
-		combinations += part.get_combinations();
-	}
+    for(auto &part : parts) {
+        combinations += part.get_combinations();
+    }
 
-	return combinations;
+    return combinations;
 }
 
 

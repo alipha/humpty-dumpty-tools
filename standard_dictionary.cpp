@@ -23,54 +23,54 @@ map<standard_dict_id, standard_dictionary> standard_dictionary::standard_dicts;
 
 
 void standard_dictionary::init() {
-	if(!standard_dicts.empty()) {
-		return;
-	}
+    if(!standard_dicts.empty()) {
+        return;
+    }
 
-	create_dict(LOWER, LOWER_CHARS);
-	create_dict(UPPER, UPPER_CHARS);
-	create_dict(SYMBOL, SYMBOL_CHARS);
-	create_dict(DIGIT, DIGIT_CHARS);
-	create_dict(ALL, LOWER_CHARS UPPER_CHARS SYMBOL_CHARS DIGIT_CHARS);
+    create_dict(LOWER, LOWER_CHARS);
+    create_dict(UPPER, UPPER_CHARS);
+    create_dict(SYMBOL, SYMBOL_CHARS);
+    create_dict(DIGIT, DIGIT_CHARS);
+    create_dict(ALL, LOWER_CHARS UPPER_CHARS SYMBOL_CHARS DIGIT_CHARS);
 }
 
 
 const standard_dictionary &standard_dictionary::get(standard_dict_id id) {
-	auto it = standard_dicts.find(id);
+    auto it = standard_dicts.find(id);
 
-	if(it == standard_dicts.end()) {
-		throw invalid_argument(str(format("stanard dictionary %1% does not exist.") % id));
-	}
+    if(it == standard_dicts.end()) {
+        throw invalid_argument(str(format("stanard dictionary %1% does not exist.") % id));
+    }
 
-	return it->second;
+    return it->second;
 }
 
 
 double standard_dictionary::get_combinations(int transform_types) const {
-	if(transform_types != NONE && !transformable) {
-		throw invalid_argument(str(format("dictionary is not transformable and transform_type %1% was passed") 
-			% transform_types));
-	}
+    if(transform_types != NONE && !transformable) {
+        throw invalid_argument(str(format("dictionary is not transformable and transform_type %1% was passed") 
+            % transform_types));
+    }
 
-	double combos = combinations[transform_types];
+    double combos = combinations[transform_types];
 
-	if(combos == 0.0) {
-		// TODO: calculate combinations lazily for english dictionaries, etc
-	}
+    if(combos == 0.0) {
+        // TODO: calculate combinations lazily for english dictionaries, etc
+    }
 
-	return combos;
+    return combos;
 }
-	
-	
+    
+    
 void standard_dictionary::create_dict(standard_dict_id id, const char *chars) {
-	size_t count;
-	standard_dictionary &dict = standard_dicts[id];	// create dict
+    size_t count;
+    standard_dictionary &dict = standard_dicts[id];    // create dict
 
-	for(count = 0; chars[count]; count++) {
-		dict.values.push_back(string(1, chars[count]));
-	}
-	
-	dict.transformable = false;
-	dict.combinations[NONE] = count;
+    for(count = 0; chars[count]; count++) {
+        dict.values.push_back(string(1, chars[count]));
+    }
+    
+    dict.transformable = false;
+    dict.combinations[NONE] = count;
 }
 
