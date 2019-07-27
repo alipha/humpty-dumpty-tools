@@ -8,10 +8,9 @@
 
 
 using namespace std;
-using namespace boost;
 
 
-class selector : noncopyable {
+class selector : boost::noncopyable {
 public:
     selector();
     void set_input(const uint8_t *src, size_t len);

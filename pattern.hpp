@@ -1,7 +1,7 @@
 #ifndef PATTERN_HPP
 #define PATTERN_HPP
 
-#include "dictionary.hpp"
+#include "dicts/dictionary.hpp"
 #include <vector>
 #include <string>
 
@@ -12,14 +12,14 @@ class selector;
 
 class pattern {
 public:
-    pattern() : parts(),  combinations(0.0) {}
+    pattern() : parts(), combos(0.0) {}
     
     string get(selector &s) const;
-    double get_combinations() const;
+    double combinations() const;
     
 private:
     vector<dictionary> parts;
-    mutable double combinations;
+    mutable double combos;
 };
 
 

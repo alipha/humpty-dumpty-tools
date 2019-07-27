@@ -4,10 +4,9 @@
 
 
 using namespace std;
-using namespace boost;
 
 
-class pattern_parser : noncopyable {
+class pattern_parser : boost::noncopyable {
 public:
     pattern_parser();
 
